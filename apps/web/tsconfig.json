@@ -1,0 +1,35 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"],
+      "@school-erp/types": ["../../packages/types/src"],
+      "@school-erp/constants": ["../../packages/constants/src"],
+      "@school-erp/design-tokens": ["../../packages/design-tokens/src"],
+      "@school-erp/mock-data": ["../../packages/mock-data/src"],
+      "@school-erp/validation": ["../../packages/validation/src"],
+      "@school-erp/utils": ["../../packages/utils/src"],
+      "@school-erp/ui": ["../../packages/ui/src"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}

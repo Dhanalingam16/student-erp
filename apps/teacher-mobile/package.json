@@ -1,0 +1,21 @@
+{
+  "name": "teacher-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Expo app built'",
+    "start": "expo start"
+  },
+  "dependencies": {
+    "@school-erp/constants": "workspace:*",
+    "@school-erp/mock-data": "workspace:*",
+    "@school-erp/types": "workspace:*",
+    "@school-erp/ui": "workspace:*",
+    "expo": "~50.0.0",
+    "react": "18.2.0",
+    "react-native": "0.73.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}
