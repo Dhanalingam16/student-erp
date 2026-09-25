@@ -1,0 +1,260 @@
+export type RoleType = 
+  | 'super_admin'
+  | 'school_admin'
+  | 'principal'
+  | 'accountant'
+  | 'teacher'
+  | 'parent'
+  | 'student'
+  | 'librarian'
+  | 'transport_manager'
+  | 'hostel_warden'
+  | 'security_guard';
+
+export interface UserSession {
+  id: string;
+  name: string;
+  email: string;
+  role: RoleType;
+  avatarUrl?: string;
+  phone?: string;
+  designation?: string;
+  linkedStudentIds?: string[];
+  classTeacherOf?: string;
+}
+
+export type AttendanceStatus = 'present' | 'absent' | 'late' | 'half_day' | 'excused';
+
+export interface AttendanceRecord {
+  id: string;
+  studentId: string;
+  studentName: string;
+  rollNumber: string;
+  classSection: string;
+  date: string;
+  status: AttendanceStatus;
+  checkInTime?: string;
+  remarks?: string;
+}
+
+export interface Student {
+  id: string;
+  admissionNo: string;
+  rollNumber: string;
+  firstName: string;
+  lastName: string;
+  fullName: string;
+  gender: 'male' | 'female' | 'other';
+  dob: string;
+  class: string;
+  section: string;
+  classSection: string;
+  academicYear: string;
+  parentName: string;
+  parentPhone: string;
+  parentEmail: string;
+  bloodGroup: string;
+  address: string;
+  busRouteId?: string;
+  busStopName?: string;
+  isHostelite: boolean;
+  hostelRoom?: string;
+  overallAttendancePercentage: number;
+  feeStatus: 'paid' | 'pending' | 'overdue' | 'partial';
+  pendingFeeAmount: number;
+  avatarUrl?: string;
+}
+
+export interface Parent {
+  id: string;
+  fatherName: string;
+  motherName: string;
+  primaryContact: string;
+  email: string;
+  occupation: string;
+  children: {
+    studentId: string;
+    studentName: string;
+    classSection: string;
+    rollNumber: string;
+  }[];
+}
+
+export interface Teacher {
+  id: string;
+  employeeCode: string;
+  name: string;
+  email: string;
+  phone: string;
+  designation: string;
+  qualification: string;
+  department: string;
+  isClassTeacher: boolean;
+  classSection?: string;
+  subjects: string[];
+  classes: string[];
+}
+
+export interface TimetablePeriod {
+  periodNumber: number;
+  startTime: string;
+  endTime: string;
+  subject: string;
+  teacherName: string;
+  roomNumber: string;
+}
+
+export interface HomeworkItem {
+  id: string;
+  title: string;
+  description: string;
+  classSection: string;
+  subject: string;
+  teacherName: string;
+  assignedDate: string;
+  dueDate: string;
+  attachments?: string[];
+  totalSubmissions: number;
+  totalStudents: number;
+}
+
+export interface AssignmentSubmission {
+  id: string;
+  assignmentId: string;
+  studentId: string;
+  studentName: string;
+  rollNumber: string;
+  submittedAt: string;
+  fileUrl?: string;
+  status: 'submitted' | 'graded' | 'late' | 'pending';
+  marksObtained?: number;
+  maxMarks: number;
+  teacherFeedback?: string;
+}
+
+export interface ExamRecord {
+  id: string;
+  title: string;
+  academicYear: string;
+  classSection: string;
+  subject: string;
+  examDate: string;
+  maxMarks: number;
+  passingMarks: number;
+  status: 'scheduled' | 'ongoing' | 'marks_entry' | 'published';
+}
+
+export interface StudentMarks {
+  id?: string;
+  studentId: string;
+  studentName: string;
+  rollNumber: string;
+  marksObtained: number;
+  maxMarks: number;
+  grade: string;
+  remarks?: string;
+}
+
+export interface FeeHead {
+  name: string;
+  amount: number;
+}
+
+export interface FeeStructure {
+  id: string;
+  classSection: string;
+  title: string;
+  annualTuition: number;
+  developmentCharges: number;
+  labCharges: number;
+  termInstallments: {
+    termNumber: number;
+    title: string;
+    dueDate: string;
+    amount: number;
+  }[];
+}
+
+export interface FeeTransaction {
+  id: string;
+  receiptNumber: string;
+  studentId: string;
+  studentName: string;
+  classSection: string;
+  amountPaid: number;
+  paymentMode: 'upi' | 'net_banking' | 'credit_card' | 'cash' | 'cheque';
+  transactionDate: string;
+  status: 'success' | 'failed' | 'pending';
+  feeHeads: { head: string; amount: number }[];
+  termTitle: string;
+}
+
+export interface BusRoute {
+  id: string;
+  routeNumber: string;
+  routeName: string;
+  busNumber: string;
+  capacity: number;
+  assignedStudents: number;
+  driverName: string;
+  driverPhone: string;
+  attendantName: string;
+  attendantPhone: string;
+  currentStatus: 'on_route' | 'delayed' | 'completed' | 'stationary';
+  currentLocationName: string;
+  stops: {
+    stopId: string;
+    stopName: string;
+    pickupTime: string;
+    dropTime: string;
+    studentsCount: number;
+    status: 'passed' | 'approaching' | 'next' | 'pending';
+  }[];
+}
+
+export interface VisitorPass {
+  id: string;
+  passNumber: string;
+  visitorName: string;
+  phone: string;
+  purpose: string;
+  meetingPerson: string;
+  entryTime: string;
+  exitTime?: string;
+  status: 'active' | 'checked_out';
+  vehicleNumber?: string;
+}
+
+export interface ClinicVisit {
+  id: string;
+  studentName: string;
+  classSection: string;
+  visitTime: string;
+  symptoms: string;
+  treatment: string;
+  medicationGiven: string;
+  attendingNurse: string;
+  parentNotified: boolean;
+}
+
+export interface LibraryBook {
+  id: string;
+  isbn: string;
+  title: string;
+  author: string;
+  category: string;
+  totalCopies: number;
+  availableCopies: number;
+  rackLocation: string;
+}
+
+export interface BroadcastAnnouncement {
+  id: string;
+  title: string;
+  content: string;
+  category: 'academic' | 'transport' | 'fee' | 'urgent' | 'general';
+  targetAudience: 'all' | 'teachers' | 'parents' | 'students' | 'class_10';
+  publishedAt: string;
+  publishedBy: string;
+  priority: 'normal' | 'high' | 'critical';
+}
